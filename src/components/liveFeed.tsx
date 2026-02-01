@@ -2,44 +2,29 @@ import { observer } from "mobx-react-lite";
 import { useStores } from "../store/StoreContext";
 import {
     List, ListItem, ListItemText, ListItemButton,
-    ListItemIcon, Chip, TextField, Box, Typography
+    ListItemIcon, Chip, Box, Typography
 } from "@mui/material";
 import RadarIcon from '@mui/icons-material/Radar';
-import { useState } from "react";
 
 const LiveFeed = observer(() => {
     const { mainStore } = useStores();
-    const [search, setSearch] = useState("");
 
-    const drones = Array.from(mainStore.objects.values()).filter(d =>
-        d.id.toLowerCase().includes(search.toLowerCase())
-    );
+    const drones = Array.from(mainStore.objects.values())
 
     return (
-        <Box sx={{ width: 300, height: '100%', display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ width: 300, height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: "#424242", border: "1px solid gray"}}>
             <Box sx={{ p: 2 }}>
                 <Typography variant="h6" gutterBottom>Об'єкти ({drones.length})</Typography>
-                <TextField
-                    fullWidth
-                    size="small"
-                    label="Пошук ID..."
-                    variant="outlined"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                />
             </Box>
 
             <List sx={{ flexGrow: 1, overflowY: 'auto' }}>
                 {drones.map((drone) => (
                     <ListItem key={drone.id} disablePadding>
-                        <ListItemButton onClick={() => {
-                            // Тут ми пізніше додамо метод для центрування карти
-                            console.log("Фокус на:", drone.id);
-                        }}>
+                        <ListItemButton>
                             <ListItemIcon>
                                 <RadarIcon color={drone.isLost ? "error" : "success"} />
                             </ListItemIcon>
-                            <ListItemText
+                            <ListItemText sx={{fontWeight: 500,}}
                                 primary={drone.id}
                                 secondary={`Напрям: ${drone.direction.toFixed(0)}°`}
                             />

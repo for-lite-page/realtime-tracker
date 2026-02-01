@@ -21,12 +21,12 @@ const App = observer(() => {
     const objectsCount = mainStore.objects.size
 
     return (
-        <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
+        <div style={{ padding: '20px', width: "100%",  fontFamily: 'sans-serif' }}>
             <Header objectsCount={objectsCount}/>
 
-            <Box sx={{ display: 'flex', height: '100vh', width: '90vw', gap: '10px' }}>
+            <Box sx={{ display: 'flex' , height: '100vh', width: '100%', gap: '10px' }}>
+                <Map/>
                 <LiveFeed/>
-                <Map></Map>
             </Box>
         </div>
     )

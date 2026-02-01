@@ -1,16 +1,8 @@
 import {MapContainer, TileLayer, Marker, Popup, useMap} from 'react-leaflet';
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../store/StoreContext';
-import L from 'leaflet';
 import {useEffect} from "react";
-
-const droneIcon = (direction: number, isLost: boolean) => L.divIcon({
-    html: `
-    <div style="transform: rotate(${direction}deg); transition: all 0.5s linear;">
-       <svg xmlns="http://www.w3.org/2000/svg" fill="${isLost ? 'red' : '#1976d2'}" viewBox="0 0 384 512"><path d="M169.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L192 205.3 54.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"/></svg>
-    </div>`,
-    className: 'custom-drone-icon',
-});
+import {droneIcon} from "../assets/droneIcon.ts";
 
 const MapView = observer(() => {
     const { mainStore } = useStores();

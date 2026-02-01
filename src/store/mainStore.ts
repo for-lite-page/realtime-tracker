@@ -3,7 +3,7 @@ import type {RootStore} from "./rootStore"
 import type {Drone} from "../lib/globalInterface.ts";
 
 export class MainStore {
-    objects = new Map<string, any>()
+    objects = new Map<string, Drone>()
     rootStore: RootStore;
     private socket: WebSocket | null = null
 
@@ -30,9 +30,9 @@ export class MainStore {
         runInAction(() => {
             this.objects.forEach((obj, id) => {
                 const diff = now - obj.lastSeen;
-                if (diff > 300000) {
+                if (diff > 9000) {
                     this.objects.delete(id);
-                } else if (diff > 10000) {
+                } else if (diff > 1000) {
                     obj.isLost = true;
                 }
             })
