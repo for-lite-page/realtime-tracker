@@ -1,73 +1,58 @@
-# React + TypeScript + Vite
+# Real-time Drone Tracker (GCS Simulation)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Це тестове завдання, в якому я реалізував систему моніторингу безпілотних об'єктів у реальному часі. Основний фокус був
+на роботі з великим потоком даних через WebSockets та управлінні станом за допомогою MobX.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Основний функціонал
 
-## Expanding the ESLint configuration
+- **Real-time Map:** Візуалізація 150+ дронів одночасно. Об'єкти плавно рухаються завдяки CSS-інтерполяції координат.
+- **WebSocket Integration:** Дані летять з Mock-сервера, імітуючи реальну телеметрію.
+- **MobX RootStore Pattern:** Масштабована архітектура сторів (MainStore + AuthStore).
+- **"Dead Man's Switch" Logic:** Система автоматично позначає дрон як "Lost", якщо телеметрія не оновлюється більше 10
+  секунд, і видаляє його через 5 хвилин тиші.
+- **Smart UI:** Пошук по ID об'єкта та миттєвий "jump-to" (центрування карти) при кліку на дрон у списку.
+- **Authorization:** Доступ до панелі лише за унікальним ключем.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Стек технологій
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+| Frontend            | Backend (Mock)      | Спеціальні інструменти      |
+|:--------------------|:--------------------|:----------------------------|
+| **React 18** (Vite) | **Node.js**         | **Leaflet** (Map Engine)    |
+| **TypeScript**      | **WS** (WebSockets) | **MobX** (State Management) |
+| **Material UI**     |                     | **Lucide Icons**            |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## Як запустити проект
+
+Проект складається з клієнтської та серверної частин. Для коректної роботи потрібно запустити обидві.
+
+### 1. Клонування репозиторію
+```bash 
+git clone [https://github.com/for-lite-page/realtime-tracker.git](https://github.com/for-lite-page/realtime-tracker.git)
+cd realtime-tracker
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Запуск Mock-сервера (Terminal 1)
+```bash
+    cd server
+    npm install
+    node server.js
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 3. Запуск Frontend (Terminal 2)
+```bash
+npm install
+npm run dev
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 🔑 Ключ для входу: 
+```
+testSecret
 ```

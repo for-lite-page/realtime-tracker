@@ -35,7 +35,6 @@ const App = observer(() => {
                 >
                     <Logout sx={{color: 'gray', '&:hover': {
                             color: 'red',
-                            borderColor: '#00ff41',
                         }}}/>
                 </IconButton>
 
