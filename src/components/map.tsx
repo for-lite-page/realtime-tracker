@@ -10,8 +10,8 @@ const MapView = observer(() => {
 
     return (
         <MapContainer
-            center={[50.45, 30.52]}
-            zoom={13}
+            center={[28.2915, -16.6291]}
+            zoom={7}
             style={{ height: '100%', width: '90%' }}
         >
             <TileLayer

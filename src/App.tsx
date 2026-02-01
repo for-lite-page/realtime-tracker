@@ -5,30 +5,46 @@ import {observer} from "mobx-react-lite";
 import Header from "./components/header.tsx";
 import LiveFeed from "./components/liveFeed.tsx";
 import Map from "./components/map.tsx";
-import {Box} from "@mui/material";
+import {Box, IconButton} from "@mui/material";
+import LoginWindow from "./components/loginWindow.tsx";
+import { Logout } from "@mui/icons-material";
 
 const App = observer(() => {
-    const { mainStore } = useStores()
+    const { mainStore, authStore } = useStores()
 
     useEffect(() => {
-        mainStore.connect()
-
+        if(authStore.authStatus) {
+            mainStore.connect()
+        }
         return () => {
             mainStore.disconnect()
         };
-    }, [mainStore])
+    }, [authStore.authStatus, mainStore])
+
+    if(!authStore.isAuthenticated) {
+        return <LoginWindow/>
+    }
 
     const objectsCount = mainStore.objects.size
 
     return (
-        <div style={{ padding: '20px', width: "100%",  fontFamily: 'sans-serif' }}>
-            <Header objectsCount={objectsCount}/>
+        <Box sx={{ padding: '20px', width: "100%",  fontFamily: 'sans-serif' }}>
+                <IconButton
+                    sx={{ position: 'absolute', top: 8, right: 50 }}
+                    onClick={() => {authStore.logout()}}
+                >
+                    <Logout sx={{color: 'gray', '&:hover': {
+                            color: 'red',
+                            borderColor: '#00ff41',
+                        }}}/>
+                </IconButton>
 
+            <Header objectsCount={objectsCount}/>
             <Box sx={{ display: 'flex' , height: '100vh', width: '100%', gap: '10px' }}>
                 <Map/>
                 <LiveFeed/>
             </Box>
-        </div>
+        </Box>
     )
 })
 
