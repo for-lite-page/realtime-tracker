@@ -2,10 +2,14 @@ import { WebSocketServer } from 'ws';
 
 const wss = new WebSocketServer({ port: 8080 })
 
+const BASE_LAT = 28.2915;
+const BASE_LNG = -16.6291;
+
+
 let drones = Array.from({ length: 50 }).map((_, index) => ({
     id: `drone-${index}`,
-    lat: 50.4501 + (Math.random() - 0.5) * 0.1,
-    lng: 30.5234 + (Math.random() - 0.5) * 0.1,
+    lat: BASE_LAT + (Math.random() - 0.5) * 0.5,
+    lng: BASE_LNG + (Math.random() - 0.5) * 0.5,
     direction: Math.floor(Math.random() * 360),
     speed: 0.0001 + Math.random() * 0.0002
 }))
