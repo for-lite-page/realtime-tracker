@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import { useStores } from "../store/StoreContext";
+import { useStores } from "../customHooks/useStores.ts";
 import {
     List, ListItem, ListItemText, ListItemButton,
     ListItemIcon, Chip, Box, Typography
@@ -7,7 +7,7 @@ import {
 import RadarIcon from '@mui/icons-material/Radar';
 
 const LiveFeed = observer(() => {
-    const { mainStore } = useStores();
+    const { mainStore } = useStores()
 
     const drones = Array.from(mainStore.objects.values())
 

@@ -1,5 +1,5 @@
 import { Button, Container, Paper, TextField, Typography} from "@mui/material";
-import { useStores } from "../store/StoreContext.tsx";
+import { useStores } from "../customHooks/useStores.ts";
 import { useState } from "react";
 import * as React from "react";
 

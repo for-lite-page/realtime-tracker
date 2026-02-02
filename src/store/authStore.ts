@@ -36,5 +36,4 @@ export class AuthStore {
             return true
         }
     }
-
 }

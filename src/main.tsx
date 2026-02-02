@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { StoreProvider } from "./store/StoreContext.tsx";
+import { StoreProvider } from "./lib/storeProvider.tsx";
 import './index.css'
 import App from './App.tsx'
 import 'leaflet/dist/leaflet.css';

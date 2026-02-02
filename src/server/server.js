@@ -6,7 +6,7 @@ const BASE_LAT = 28.2915;
 const BASE_LNG = -16.6291;
 
 
-let drones = Array.from({ length: 50 }).map((_, index) => ({
+let drones = Array.from({ length: 150 }).map((_, index) => ({
     id: `drone-${index}`,
     lat: BASE_LAT + (Math.random() - 0.5) * 3,
     lng: BASE_LNG + (Math.random() - 0.5) * 3,

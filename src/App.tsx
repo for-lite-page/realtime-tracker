@@ -1,6 +1,6 @@
 import './App.css'
 import {useEffect} from "react";
-import {useStores} from "./store/StoreContext.tsx";
+import {useStores} from "./customHooks/useStores.ts";
 import {observer} from "mobx-react-lite";
 import Header from "./components/header.tsx";
 import LiveFeed from "./components/liveFeed.tsx";
@@ -18,7 +18,7 @@ const App = observer(() => {
         }
         return () => {
             mainStore.disconnect()
-        };
+        }
     }, [authStore.authStatus, mainStore])
 
     if(!authStore.isAuthenticated) {

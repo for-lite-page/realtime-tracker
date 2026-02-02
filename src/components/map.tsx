@@ -1,12 +1,12 @@
 import {MapContainer, TileLayer, Marker, Popup, useMap} from 'react-leaflet';
 import { observer } from 'mobx-react-lite';
-import { useStores } from '../store/StoreContext';
+import { useStores } from '../customHooks/useStores.ts';
 import {useEffect} from "react";
 import {droneIcon} from "../assets/droneIcon.ts";
 
 const MapView = observer(() => {
-    const { mainStore } = useStores();
-    const drones = Array.from(mainStore.objects.values());
+    const { mainStore } = useStores()
+    const drones = Array.from(mainStore.objects.values())
 
     return (
         <MapContainer
